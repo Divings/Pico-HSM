@@ -31,5 +31,25 @@ client applications.
 
 ---
 
-## 📂 Directory Structure
+## 🚀 Quick Start
 
+### 1. Upload firmware
+
+Place the contents of `firmware/` into the Pico's storage:
+
+2. Run Python client example
+Release RSA-Cryptors is Pico-HSM File Encrypt/Decrypt Software
+
+## 🛡 Security
+
+- MASTER_SEED is saved securely.
+- Wi-Fi credentials are not persisted.
+- APIs require local or authenticated access.
+- Physical reset via BootSel ensures recovery to a trusted state.
+
+---
+
+## 📜 License
+
+MIT License  
+© 2025 Tomoya Koga
