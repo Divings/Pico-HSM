@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Pico-HSM – Raspberry Pi Pico W Hardware Security Module</title>
+<style>
+    body {
+        font-family: "Segoe UI", sans-serif;
+        margin: 40px;
+        line-height: 1.7;
+        background: #f9fafb;
+    }
+    h1, h2, h3 {
+        color: #2c3e50;
+    }
+    h1 {
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+    }
+    .section {
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        border-left: 6px solid #3498db;
+        box-shadow: 0 2px 6px #00000010;
+    }
+    code {
+        background: #eee;
+        padding: 3px 5px;
+        border-radius: 4px;
+        font-size: 90%;
+    }
+    pre {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+    }
+    a {
+        color: #3498db;
+    }
+</style>
+</head>
+<body>
+
+<h1>🔐 Raspberry Pi Pico W – Hardware Security Module (HSM)</h1>
+
+<p><b>Author:</b> Tomoya Koga (古賀智也)<br>
+<b>Organization:</b> Anvelk Innovations LLC / Innovation Craft Inc.<br>
+<b>License:</b> MIT</p>
+
+<hr>
+
+<div class="section">
+<h2>概要 (Overview)</h2>
+<p>
+このプロジェクトは <b>Raspberry Pi Pico / Pico W</b> を用いた  
+軽量ハードウェアセキュリティモジュール (HSM) の実装です。
+</p>
+
+<p>
+MASTER_SEED を内部に安全に保持し、  
+以下のような暗号処理をローカル・USB・Wi-Fi越しに提供します：
+</p>
+
+<ul>
+    <li>デバイス固有の鍵派生（unique_id ベース）</li>
+    <li>AES-GCM 暗号化 / 復号</li>
+    <li>HMAC-SHA256（EncryptSecureDEC / JAES 用）</li>
+    <li>RSA 鍵生成 / 署名 / 検証</li>
+    <li>低消費電力スリープ</li>
+    <li>Wi-Fi（REST API）/ BLEによる通信（オプション）</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>✨ 主な特徴 (Features)</h2>
+<ul>
+    <li><b>unique_id()</b> を用いたデバイス固有キー生成</li>
+    <li><b>MASTER_SEED</b> の安全な内部保存</li>
+    <li>AES-GCM / RSA2048 の暗号処理</li>
+    <li>Wi-Fi REST API によるリモートHSM</li>
+    <li>BLE対応（任意）</li>
+    <li>操作ごとのLEDインジケータ</li>
+    <li>非操作時の自動スリープ</li>
+    <li>BootSel ボタンで強制安全リセット</li>
+    <li>Python / CLI / EncryptSecureDEC / JAES から利用可能</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>🚀 クイックスタート (Quick Start)</h2>
+
+<h3>1. ファームウェアをPicoに書き込み</h3>
+<a href="pico-hsm-setup.html" >セットアップマニュアルはこちら</a>
+<p><code>main.py</code> と <code>boot.py</code> を Pico 内部ストレージへコピーします。</p>
+<p>main.pyのMASTER_SEEDは最低 128bit（英数字22文字以上）<br>実運用では 256bit（英数字43文字以上）
+のランダム値を使用してください。<br>
+これは一般的な暗号モジュールで推奨される鍵強度に準じています。</p>
+
+<h3>2. Pythonクライアント（例）</h3>
+
+<pre>
+from PicoHSM import PicoHSM_HMAC
+
+hsm = PicoHSM_HMAC()
+mac = hsm.hmac(b"hello pico-hsm")
+
+print(mac.hex())
+</pre>
+
+<p>
+EncryptSecureDEC(サブスクリプション版) / RSA-Cryptors で使用可能です。
+</p>
+</div>
+
+<div class="section">
+<h2>🛡 セキュリティ (Security)</h2>
+<ul>
+    <li>MASTER_SEED は Pico内部に安全に保存（外部へ露出しない）</li>
+    <li>Wi-Fi 認証情報は永続保存しない</li>
+    <li>USB通信はJSONベースの単純プロトコル</li>
+    <li>BootSel リセットで信頼状態に復元可能</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>📜 ライセンス (License)</h2>
+<p>
+MIT License<br>
+© 2025 Tomoya Koga
+</p>
+</div>
+
+</body>
+</html>
