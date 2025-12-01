@@ -45,6 +45,7 @@ def load_or_create_seed():
     seed = os.urandom(32)  # 32バイト = 256bit 推奨
     with open("master.seed", "wb") as f:
         f.write(seed)
+    return seed
 
 # MASTER_SEED（外部流出しない固定データ）
 MASTER_SEED = load_or_create_seed()
