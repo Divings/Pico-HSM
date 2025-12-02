@@ -1,12 +1,13 @@
 Pico-HSM Custom Firmware – README (Power Management Edition)
 
-このファームウェアは、Raspberry Pi Pico / Pico W を簡易ハードウェアセキュリティモジュール（HSM）
-として動作させるオリジナル実装に対して、
-「電源管理（Sleep / Shutdown）」だけを追加したカスタム版です。
+このファームウェアは、Raspberry Pi Pico / Pico W 互換機を簡易ハードウェアセキュリティモジュール（HSM）
+として動作させるオリジナル実装に対して、「電源管理（Sleep / Shutdown）」だけを追加したカスタム版です。
+
+
+注意:一部互換機向けの変更があります。Rasberripi picoなどで利用する場合、同封のVhenges.txtを使いコードを書き換えてください
 
 暗号処理部分（HMAC、keypart、UID 派生、SEED管理、XOR暗号処理など）は
 オリジナルから一切変更していません。
-
 
 【今回追加された機能（カスタム内容はここだけ）】
 
@@ -64,7 +65,7 @@ Shutdown:
 ・完全終了し USB から消える
 ・安全に取り外す用途
 ・再利用時は Pico の抜き差しが必要
-
+（使用する互換機によっては完全に終了しない可能性あり)
 
 【バージョン】
 
