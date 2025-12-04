@@ -156,6 +156,31 @@ def hmac_sha256(key, msg):
     i_key_pad = bytes((b ^ 0x36) for b in key)
     return uhashlib.sha256(o_key_pad + uhashlib.sha256(i_key_pad + msg).digest()).digest()
 
+# ワンタイムパスワード用の変数
+CURRENT_SESSION_KEY = None
+
+def onetime_password():
+    SESS_KEY = secure_random_bytes(16)
+    global CURRENT_SESSION_KEY
+    CURRENT_SESSION_KEY = SESS_KEY
+    return {"onetime_key": ubinascii.b2a_base64(SESS_KEY).decode().strip()}
+CURRENT_OTP = None
+def cmd_session():
+    global CURRENT_OTP
+    CURRENT_OTP = os.urandom(16)
+    otp_b64 = ubinascii.b2a_base64(CURRENT_OTP).decode().strip()
+    return {"otp": otp_b64}
+
+def verify_response(resp_hash_hex):
+    import hashlib
+    expected = hashlib.sha256(CURRENT_OTP).digest()
+    
+    try:
+        client_hash = ubinascii.unhexlify(resp_hash_hex)
+    except:
+        return False
+    return client_hash == expected
+
 # ----------------------------------------------------------
 # コマンド処理
 # ----------------------------------------------------------
@@ -175,8 +200,21 @@ def process_request(obj):
             return {"error": "hmac failed"}
 
     if cmd == "keypart":
-        return {"keypart": ubinascii.b2a_base64(SECRET_AES_KEYPART).decode().strip()}
+        # payload から hmac を取り出す
+        client_hmac_b64 = obj.get("auth", None)
+        if client_hmac_b64 is None:
+            return {"status": "error", "message": "missing_hmac"}
+        
+        if verify_response(client_hmac_b64)==False:
+            return {"status": "error", "message": "auth_failed"}
 
+        return {
+            "keypart": ubinascii.b2a_base64(SECRET_AES_KEYPART).decode().strip()
+        }
+    
+    if cmd == "onetime":
+        return onetime_password()
+    
     if cmd == "info":
         return {
             "device": DEVICE_ID,
@@ -208,6 +246,9 @@ def process_request(obj):
         machine.lightsleep()
         return None
 
+    if cmd == "session_key":
+        return cmd_session()
+
     return {"error":"unknown cmd"}
 
 # ----------------------------------------------------------
@@ -233,3 +274,4 @@ def main():
             print(json.dumps(res))
 
 main()
+
