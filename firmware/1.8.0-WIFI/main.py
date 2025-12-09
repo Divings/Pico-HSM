@@ -14,8 +14,13 @@ from machine import Pin, unique_id
 LED = Pin("LED", Pin.OUT)
 LED.value(0)
 import network
+
+# =========================================================
+#  WI-FI 設定
+# =========================================================
 SSID = ""
 PASS = ""
+
 WLAN_IF = None
 
 def wifi_connect():
@@ -84,7 +89,7 @@ DEVICE_ID = ubinascii.hexlify(RAW_UID).decode().upper()
 # =========================================================
 #  設定 / ファイル名
 # =========================================================
-FW_VERSION     = "1.7.0-OTP-Auth-LOCKDOWN"
+FW_VERSION     = "1.8.0-For-WIFI"
 HMAC_KEY_FILE  = "hsm_hmac.key"
 KEYPART_FILE   = "hsm_keypart.key"
 
