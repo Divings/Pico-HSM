@@ -14,8 +14,8 @@ from machine import Pin, unique_id
 LED = Pin("LED", Pin.OUT)
 LED.value(0)
 import network
-SSID = "***REMOVED***"
-PASS = "***REMOVED***"
+SSID = ""
+PASS = ""
 WLAN_IF = None
 
 def wifi_connect():
