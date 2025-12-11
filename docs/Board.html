@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Pico-HSM / RSA-Cryptors 動作確認済みボード一覧</title>
+<style>
+    body {
+        font-family: "Segoe UI", sans-serif;
+        line-height: 1.7;
+        padding: 20px;
+        max-width: 900px;
+        margin: auto;
+        background: #f8f8f8;
+    }
+    h1 {
+        border-bottom: 3px solid #444;
+        padding-bottom: 6px;
+    }
+    h2 {
+        margin-top: 40px;
+        border-left: 6px solid #444;
+        padding-left: 10px;
+    }
+    .section {
+        background: #fff;
+        padding: 18px 22px;
+        margin-top: 18px;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    ul {
+        margin-top: 10px;
+    }
+    .note {
+        font-size: 0.9em;
+        color: #555;
+        margin-top: 8px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Pico-HSM / RSA-Cryptors 動作確認済みボード一覧</h1>
+
+<p>本ページは、Pico-HSM・RSA-Cryptors で動作確認済みの RP2040 搭載ボード一覧をまとめたものです。</p>
+
+<div class="section">
+<h2>■ 動作確認済みボード</h2>
+
+<h3>1. Raspberry Pi Pico</h3>
+<ul>
+    <li>非Wi-Fiモデル</li>
+    <li>専用ファームウェアファイル：pico-NoWIFI フォルダ内の Python ファイル</li>
+    <li>USB接続のみで利用可能</li>
+</ul>
+
+<h3>2. Raspberry Pi Pico W</h3>
+<ul>
+    <li>Wi-Fi搭載モデル</li>
+    <li>専用HSMファームウェアファイル：Pico-W フォルダ内の Python ファイル</li>
+    <li>USB接続 + Wi-Fi接続の両対応</li>
+</ul>
+
+<h3>3. RP-2040-Grove Board（互換ボード）</h3>
+<ul>
+    <li>RP2040搭載の Grove 拡張ボード</li>
+    <li>専用ファームウェアファイル：Customfirmware フォルダ内の Python ファイル</li>
+    <li>USB接続で動作確認済み</li>
+    <li>Wi-Fi機能は未搭載のため、Wi-Fi接続には非対応</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>■ ファームウェアに関する重要事項</h2>
+<ul>
+    <li>全てのボードは「専用ファームウェア」でのみ動作します。</li>
+    <li>対応していないボードに書き込んだ場合：</li>
+</ul>
+
+<ul>
+    <li><strong>ボードが破損することはありません</strong></li>
+    <li>HSMファームウェアが起動せず機能しません</li>
+    <li>USBストレージとしては通常通りマウントされます</li>
+    <li>正しいファームウェアを上書きすれば復旧できます</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>■ 未対応ボードについて</h2>
+<p>以下のような RP2040 ボードは、現在は動作保証外です：</p>
+
+<ul>
+    <li>独自 USB VID/PID を持つサードパーティ製 RP2040 ボード</li>
+    <li>I2C/SPI/LED が異なる特殊基板</li>
+    <li>Wi-Fi モジュールが特殊仕様の Pico W 互換品</li>
+    <li>Wi-Fi モジュール非搭載ボードに Wi-Fi対応版を書き込んだ場合</li>
+</ul>
+
+<p class="note">※これらに専用ファームウェアを書き込んでも、起動しないだけで物理的な故障は発生しません。</p>
+</div>
+
+<div class="section">
+<h2>■ 今後の対応予定</h2>
+<ul>
+    <li>追加互換ボードの調査中</li>
+    <li>ユーザー提供による動作報告の収集</li>
+    <li>今後ファームウェア側で自動検出機能を強化予定</li>
+</ul>
+</div>
+
+<p class="note">最終更新日：2025-12-11</p>
+
+</body>
+</html>

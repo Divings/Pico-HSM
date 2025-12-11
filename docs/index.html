@@ -95,6 +95,7 @@ MASTER_SEED を内部に安全に保持し、
 
 <h3>1. ファームウェアをPicoに書き込み</h3>
 <a href="pico-hsm-setup.html" >セットアップマニュアルはこちら</a>
+<p><a href="Board.html">動作確認済み開発ボードはこちら</a></p>
 <p><code>main.py</code> と <code>boot.py</code> を Pico 内部ストレージへコピーします。</p>
 <p>main.pyのMASTER_SEEDは最低 128bit（英数字22文字以上）<br>実運用では 256bit（英数字43文字以上）
 のランダム値を使用してください。<br>
@@ -110,7 +111,6 @@ mac = hsm.hmac(b"hello pico-hsm")
 
 print(mac.hex())
 </pre>
-
 <p>
 EncryptSecureDEC(サブスクリプション版) / RSA-Cryptors で使用可能です。
 </p>
