@@ -1,0 +1,20 @@
+=== Pico-HSM Firmware Folder List ===
+
+■ Customfirmware
+互換機用ファームウェア。
+USB-TypeAドングル型やESP32互換基板など、
+純正Pico以外のデバイス向けに調整したバージョン。
+(WIFIに未対応な互換機を使用して、開発しています)
+
+
+■ Pico-NoWIFI
+Wi-Fi非対応のRaspberry Pi Pico（無印）用ファームウェア。
+USB接続のみで動作し、電波を使わない安全版。
+検証環境や保守用途に適しています。
+
+
+■ Pico-W
+メイン開発版（Pico W 用）。
+Wi-Fi対応、HTTP JSON API対応、OTP認証、AESストレージなど
+すべての拡張機能を搭載した最上位ファームウェア。
+通常運用はこちらを使用します。
